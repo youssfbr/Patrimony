@@ -1,0 +1,2 @@
+INSERT INTO tb_item (barcode_label, description, acquisition_date) VALUES ('DKJT395', 'PS5', now());
+INSERT INTO tb_item (barcode_label, description, acquisition_date) VALUES ('HEDT', 'PC GAMER AMD Ryzen 7 5700X', now());
