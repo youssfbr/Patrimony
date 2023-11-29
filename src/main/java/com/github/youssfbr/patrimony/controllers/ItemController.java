@@ -1,14 +1,14 @@
 package com.github.youssfbr.patrimony.controllers;
 
+import com.github.youssfbr.patrimony.dtos.ItemCreateRequestDTO;
 import com.github.youssfbr.patrimony.dtos.ItemResponseDTO;
 import com.github.youssfbr.patrimony.services.IItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -25,5 +25,18 @@ public class ItemController {
     @GetMapping("/{id}")
     public ResponseEntity<ItemResponseDTO> findItemById(@PathVariable Long id) {
         return ResponseEntity.ok(itemService.findItemById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<ItemResponseDTO> itemCreate(@RequestBody ItemCreateRequestDTO itemCreateRequestDTO) {
+
+        final ItemResponseDTO item = itemService.createItem(itemCreateRequestDTO);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(item.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(item);
     }
 }

@@ -2,6 +2,7 @@ package com.github.youssfbr.patrimony.services.impl;
 
 import com.github.youssfbr.patrimony.dtos.ItemCreateRequestDTO;
 import com.github.youssfbr.patrimony.dtos.ItemResponseDTO;
+import com.github.youssfbr.patrimony.entities.Item;
 import com.github.youssfbr.patrimony.repositories.IItemRepository;
 import com.github.youssfbr.patrimony.services.IItemService;
 import com.github.youssfbr.patrimony.services.exceptions.ResourceNotFoundException;
@@ -36,7 +37,10 @@ public class ItemService implements IItemService {
     }
 
     @Override
+    @Transactional
     public ItemResponseDTO createItem(ItemCreateRequestDTO itemCreateRequestDTO) {
-        return null;
+        final Item itemToSave = new Item(itemCreateRequestDTO);
+        final Item itemSaved = itemRepository.save(itemToSave);
+        return new ItemResponseDTO(itemSaved);
     }
 }

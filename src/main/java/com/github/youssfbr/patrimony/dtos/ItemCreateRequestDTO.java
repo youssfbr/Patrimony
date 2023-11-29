@@ -2,10 +2,12 @@ package com.github.youssfbr.patrimony.dtos;
 
 import com.github.youssfbr.patrimony.entities.Item;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Getter
+@NoArgsConstructor
 public class ItemCreateRequestDTO {
 
     private String barcodeLabel;
