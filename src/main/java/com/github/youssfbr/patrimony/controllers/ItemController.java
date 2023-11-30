@@ -3,6 +3,7 @@ package com.github.youssfbr.patrimony.controllers;
 import com.github.youssfbr.patrimony.dtos.ItemCreateRequestDTO;
 import com.github.youssfbr.patrimony.dtos.ItemResponseDTO;
 import com.github.youssfbr.patrimony.services.IItemService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class ItemController {
     }
 
     @PostMapping
-    public ResponseEntity<ItemResponseDTO> itemCreate(@RequestBody ItemCreateRequestDTO itemCreateRequestDTO) {
+    public ResponseEntity<ItemResponseDTO> itemCreate(@Valid @RequestBody ItemCreateRequestDTO itemCreateRequestDTO) {
 
         final ItemResponseDTO item = itemService.createItem(itemCreateRequestDTO);
 
